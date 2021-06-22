@@ -1,5 +1,6 @@
 package com.lhm.servlet.repository;
 
+import com.lhm.servlet.Util.DBUtil;
 import com.lhm.servlet.entity.Student;
 
 import javax.servlet.annotation.WebServlet;
@@ -52,5 +53,43 @@ public class StudentRepositroy {
             }
         }
         return list;
+    }
+
+    //删除
+    public void deleteById(Integer id){
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        try {
+            connection = DBUtil.getConnection();
+            String sql = "delete from student where id = ?";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1,id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            DBUtil.close(preparedStatement, connection);
+        }
+    }
+
+    //修改
+    public void update(Integer id,String name,Double score){
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        List<Student> list = new ArrayList<>();
+        try {
+            connection = DBUtil.getConnection();
+            String sql = "update student set name = ?,score = ? where id = ?";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1,name);
+            preparedStatement.setDouble(2,score);
+            preparedStatement.setInt(3,id);
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            DBUtil.close(preparedStatement, connection);
+        }
     }
 }

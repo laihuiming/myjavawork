@@ -32,6 +32,10 @@
       <td>${student.id}</td>
       <td>${student.name}</td>
       <td>${student.age}</td>
+      <td>
+        <a href="/student?method=deleteById&id=${student.id}">删除</a>
+        <a href="/student?method=findById&id=${student.id}">修改</a>
+      </td>
     </tr>
   </c:forEach>
 </table>
