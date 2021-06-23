@@ -24,7 +24,7 @@ public class LoginServlet extends HttpServlet {
         if (userRepositroy.checklogin(username,password)){
 
             System.out.println("登录成功");
-            resp.sendRedirect("/work/student");
+            resp.sendRedirect("/work/student?page=1&rows=5");
         }else{
             System.out.println("登录失败");
             resp.sendRedirect("/work/login.jsp");
